@@ -1,0 +1,29 @@
+name: Deploy to Cloud Run
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    name: Build and Deploy to Cloud Run
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Authenticate to Google Cloud
+        uses: google-github-actions/auth@v2
+        with:
+          credentials_json: '${{ secrets.GCP_SA_KEY }}'
+
+      - name: Set up Cloud SDK
+        uses: google-github-actions/setup-gcloud@v2
+
+      - name: Trigger Cloud Build
+        run: |
+          gcloud builds submit \
+            --config=cloudbuild.yaml \
+            --substitutions=_REGION=${{ secrets.REGION }},_INSTANCE_CONNECTION_NAME=${{ secrets.INSTANCE_CONNECTION_NAME }},_CLOUD_RUN_SA=${{ secrets.CLOUD_RUN_SA }},_DB_USER=${{ secrets.DB_USER }},_DB_PASS=${{ secrets.DB_PASS }},_DB_NAME=${{ secrets.DB_NAME }},_INSTANCE_UNIX_SOCKET=${{ secrets.INSTANCE_UNIX_SOCKET }}
