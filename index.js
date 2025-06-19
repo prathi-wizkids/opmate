@@ -16,7 +16,7 @@ const client = new Client({
 
 client.connect()
   .then(() => {
-    console.log('✅ Connected to Postgres!');
+    console.log('✅ Connected to Postgres! I AM HERE');
     return client.end();
   })
   .catch(err => {
