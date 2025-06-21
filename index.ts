@@ -7,11 +7,12 @@ dotenv.config();
 const app = express();
 
 // Debug logs
+console.log('--- START DEBUG LOGS ---');
 console.log("User:", process.env.DB_USER);
 console.log("Pass:", typeof process.env.DB_PASS, process.env.DB_PASS ? "✓" : "✗");
 console.log("DB:", process.env.DB_NAME);
 console.log("Socket:", process.env.INSTANCE_UNIX_SOCKET);
-
+console.log('--- ENV DEBUG END ---');
 // DB client config
 const client = new Client({
   user: process.env.DB_USER,
@@ -25,7 +26,8 @@ const client = new Client({
 client.connect()
   .then(() => {
     console.log('✅ Connected to Postgres! I AM HERE');
-    return client.end();
+    return client.query('SELECT * from gurukul');
+
   })
   .catch((err: any) => {
     console.error('❌ Connection error:', err);
