@@ -21,7 +21,9 @@ jobs:
 
       - name: Build Docker image
         run: |
-          docker build -t gcr.io/${{ secrets.PROJECT_ID }}/${{ secrets.IMAGE_NAME }}:latest .
+          IMAGE_TAG=sha-${{ github.sha }}
+          docker build -t gcr.io/${{ secrets.PROJECT_ID }}/${{ secrets.IMAGE_NAME }}:${IMAGE_TAG} .
+          echo "✅ Built image: gcr.io/${{ secrets.PROJECT_ID }}/${{ secrets.IMAGE_NAME }}:latest"
 
       - name: Authenticate Docker to Container Registry
         run: |
@@ -30,7 +32,7 @@ jobs:
       - name: Push Docker image
         run: |
           docker push gcr.io/${{ secrets.PROJECT_ID }}/${{ secrets.IMAGE_NAME }}:latest
-
+          echo "✅ Pushed image: gcr.io/${{ secrets.PROJECT_ID }}/${{ secrets.IMAGE_NAME }}:latest"
       - name: Deploy to Cloud Run
         run: |
           gcloud run deploy ${{ secrets.SERVICE_NAME }} \
