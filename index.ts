@@ -21,6 +21,7 @@ const client = new Client({
   host: process.env.INSTANCE_UNIX_SOCKET,
   port: process.env.DB_PORT ? parseInt(process.env.DB_PORT) : 5432,
 });
+console.log('🧪 BUILD: v5 - June 21 6:30PM');
 
 // Connect to Postgres
 client.connect()
