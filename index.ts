@@ -30,7 +30,7 @@ client.connect()
 //    return client.query('SELECT * from gurukul');
     client.query('SELECT * FROM gurukul')
   .then(result => {
-    console.log('📦 I AM HERE I AM HERE Query result:', JSON.stringify(result.rows, null, 2));
+    console.log('📦 I AM HAPPY UNIX SOCKET CONNECTION I AM HERE I AM HERE Query result:', JSON.stringify(result.rows, null, 2));
     return client.end();
   })
 
