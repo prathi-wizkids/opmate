@@ -26,7 +26,13 @@ const client = new Client({
 client.connect()
   .then(() => {
     console.log('✅ Connected to Postgres! I AM HERE');
-    return client.query('SELECT * from gurukul');
+//    return client.query('SELECT * from gurukul');
+    client.query('SELECT * FROM gurukul')
+  .then(result => {
+    console.log('📦 Query result:', JSON.stringify(result.rows, null, 2));
+    return client.end();
+  })
+
 
   })
   .catch((err: any) => {
