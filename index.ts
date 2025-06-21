@@ -8,10 +8,10 @@ const app = express();
 
 // Debug logs
 console.log('--- START DEBUG LOGS ---');
-console.log("User:", process.env.DB_USER);
-console.log("Pass:", typeof process.env.DB_PASS, process.env.DB_PASS ? "✓" : "✗");
-console.log("DB:", process.env.DB_NAME);
-console.log("Socket:", process.env.INSTANCE_UNIX_SOCKET);
+console.log("NEW User:", process.env.DB_USER);
+console.log("NEW Pass:", typeof process.env.DB_PASS, process.env.DB_PASS ? "✓" : "✗");
+console.log("NEW DB:", process.env.DB_NAME);
+console.log("NEW Socket:", process.env.INSTANCE_UNIX_SOCKET);
 console.log('--- ENV DEBUG END ---');
 // DB client config
 const client = new Client({
