@@ -1,2 +1,3 @@
 @echo off
-node index.js
+npx tsc
+node dist/index.js
